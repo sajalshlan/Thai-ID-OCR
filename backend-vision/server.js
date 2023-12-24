@@ -69,6 +69,12 @@ app.put("/record/:id", async (req, res) => {
   } else res.status(404).json({ message: "record not found" });
 });
 
-app.delete("/record/:id", () => {});
+app.delete("/record/:id", async (req, res) => {
+  const recordId = req.params.id;
+  const record = await records.findByIdAndDelete(recordId);
+  if (record) {
+    res.json({ message: "record deleted successfully" });
+  } else res.status(404).json({ message: "record not found" });
+});
 
 app.listen(3000, () => console.log("server running on port 3000"));
