@@ -4,6 +4,7 @@ const fs = require("fs").promises;
 const dotenv = require("dotenv");
 dotenv.config();
 
+//configuration
 const api_key = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(api_key);
 const generationConfig = {
@@ -19,7 +20,7 @@ const model = genAI.getGenerativeModel({
   generationConfig,
 });
 
-async function generateContent() {
+export const generateContent = async () => {
   try {
     // Load image
     const imagePath = "./aa.jpg";
@@ -29,7 +30,7 @@ async function generateContent() {
     // Define parts
     const parts = [
       {
-        text: "Extract the following details from the Thai ID Card provided - Identification Number, Name, Date of Birth, Religion, Address, Date of Issue, Issuing Officer, Expiry Date. Provide in JSON format in English Language. :\n",
+        text: "Extract the following details from the Thai ID Card provided - Identification Number, first name, last name, Date of Birth, Religion, Address, Date of Issue, Issuing Officer, Expiry Date. Provide in JSON format in English Language. :\n",
       },
       {
         inlineData: {
@@ -39,7 +40,6 @@ async function generateContent() {
       },
     ];
 
-    // Generate content using both text and image input
     const result = await model.generateContent({
       contents: [{ role: "user", parts }],
     });
@@ -48,7 +48,4 @@ async function generateContent() {
   } catch (error) {
     console.error("Error generating content:", error);
   }
-}
-
-// Run the function
-generateContent();
+};
