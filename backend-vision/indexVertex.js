@@ -22,14 +22,14 @@ const model = genAI.getGenerativeModel({
 async function generateContent() {
   try {
     // Load image
-    const imagePath = "./aaa.jpg";
+    const imagePath = "./aa.jpg";
     const imageData = await fs.readFile(imagePath);
     const imageBase64 = imageData.toString("base64");
 
     // Define parts
     const parts = [
       {
-        text: "Extract the following details - Identification Number, Name, Date of Birth, Religion, Address, Date of Issue, Issuing Officer, Expiry Date in JSON format in English Language:\n",
+        text: "Extract the following details from the Thai ID Card provided - Identification Number, Name, Date of Birth, Religion, Address, Date of Issue, Issuing Officer, Expiry Date. Provide in JSON format in English Language. :\n",
       },
       {
         inlineData: {
