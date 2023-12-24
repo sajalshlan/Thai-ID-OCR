@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
-const { generateContent } = require("./indexVertex");
+const getTextFromImage = require("./indexVertex");
+const mongoose = require("mongoose");
 
 //mongodb configuration
 
@@ -10,6 +11,35 @@ const mongoUri =
 
 mongoose.connect(mongoUri);
 
+//Schema
+const recordSchema = new mongoose.Schema({
+  identificationNumber: String,
+  firstName: String,
+  lastName: String,
+  dob: String,
+  doi: String,
+  doe: String,
+});
+
+//Model to perform CRUD operations on
+const records = mongoose.model("records", recordSchema);
+
+//Function to parse the data
+function extractObject(dataString) {
+  try {
+    // Remove leading and trailing backticks *and any characters before the opening curly brace*
+    const trimmedData = dataString.trim().slice(7, -3);
+
+    // Parse the JSON string into a JavaScript object
+    const parsedObject = JSON.parse(trimmedData);
+
+    return parsedObject;
+  } catch (error) {
+    console.error("Error parsing JSON:", error);
+    throw new Error("Invalid JSON format");
+  }
+}
+
 //Endpoints to expose
 // 1. Get OCR Data based on date, id, identification number
 // 2. create a new OCR record with success/fail status
@@ -17,9 +47,16 @@ mongoose.connect(mongoUri);
 // 4. delete an OCR record
 
 app.get("/records", async (req, res) => {
-  res.json({ records: await cards.find({}) });
+  res.json({ records: await records.find({}) });
 });
-app.post("/createrecord", () => {});
+app.post("/createrecord", async (req, res) => {
+  //logic for taking in an image and sending it to our function as parameter
+  console.log("hello");
+  const data = await getTextFromImage();
+  //   console.log(data);
+  const finalResponse = extractObject(data);
+  console.log(finalResponse);
+});
 app.put("/record/:id", () => {});
 app.delete("/record/:id", () => {});
 
