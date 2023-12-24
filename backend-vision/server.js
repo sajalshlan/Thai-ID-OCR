@@ -49,6 +49,7 @@ function extractObject(dataString) {
 app.get("/records", async (req, res) => {
   res.json({ records: await records.find({}) });
 });
+
 app.post("/createrecord", async (req, res) => {
   //logic for taking in an image and sending it to our function as parameter
   console.log("hello");
@@ -57,7 +58,17 @@ app.post("/createrecord", async (req, res) => {
   await records(finalResponse).save();
   res.json({ message: "record created successfully" });
 });
-app.put("/record/:id", () => {});
+
+app.put("/record/:id", async (req, res) => {
+  const recordId = req.params.id;
+  const record = await records.findByIdAndUpdate(recordId, req.body, {
+    new: true,
+  });
+  if (record) {
+    res.json({ message: "record updated successfully" });
+  } else res.status(404).json({ message: "record not found" });
+});
+
 app.delete("/record/:id", () => {});
 
 app.listen(3000, () => console.log("server running on port 3000"));
