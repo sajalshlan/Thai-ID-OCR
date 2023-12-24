@@ -53,9 +53,9 @@ app.post("/createrecord", async (req, res) => {
   //logic for taking in an image and sending it to our function as parameter
   console.log("hello");
   const data = await getTextFromImage();
-  //   console.log(data);
   const finalResponse = extractObject(data);
-  console.log(finalResponse);
+  await records(finalResponse).save();
+  res.json({ message: "record created successfully" });
 });
 app.put("/record/:id", () => {});
 app.delete("/record/:id", () => {});
