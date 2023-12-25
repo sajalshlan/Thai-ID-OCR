@@ -26,7 +26,7 @@ working demo: https://thai-ocr-frontend-eta.vercel.app/
 This is the page where users can upload their ID, and click on Get OCR and see the results there also. Also if they want to extract details of other IDs or extract again if they are not satisfied with the details. There t can see the details of the current ID as well as the previous results too.
 
 • Admin Dashboard
-working demo: https://thai-ocr-dashboard.vercel.app/
+working demo: https://thai-ocr-dashboard.vercel.app/records
 
 As the name suggests, this is the admin dashboard where we can get the records at [ ], where we can view, edit and delete any of them by clicking on the edit and delete icons.
 
