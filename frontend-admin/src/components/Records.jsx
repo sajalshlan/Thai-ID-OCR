@@ -54,24 +54,45 @@ const CourseComponent = (props) => {
         borderRadius: "10px",
       }}
     >
-      <Typography variant="h5">{props.record.identificationNumber}</Typography>
-      <Typography variant="subtitle1">{props.record.firstName}</Typography>
-      <Typography variant="subtitle1">{props.record.lastName}</Typography>
-      <Typography variant="subtitle1">{props.record.dob}</Typography>
-      <Typography variant="subtitle1">{props.record.doi}</Typography>
-      <Typography variant="subtitle1">{props.record.doe}</Typography>
+      <Typography variant="h6">
+        Identificaton Number: {props.record.identificationNumber}
+      </Typography>
+      <Typography variant="subtitle1">
+        First Name: {props.record.firstName}
+      </Typography>
+      <Typography variant="subtitle1">
+        Last Name: {props.record.lastName}
+      </Typography>
+      <Typography variant="subtitle1">
+        Date of Birth: {props.record.dob}
+      </Typography>
+      <Typography variant="subtitle1">
+        Date of Issue: {props.record.doi}
+      </Typography>
+      <Typography variant="subtitle1">
+        Date of Expiry: {props.record.doe}
+      </Typography>
       <br />
       <EditIcon
         onClick={async () => {
           console.log("hi");
-          navigate(`/records/${props.record.id}`);
+          navigate(`/records/${props.record._id}`);
         }}
       />
       <br />
       <DeleteIcon
         onClick={async () => {
           console.log("hi");
-          navigate(`/records/${props.record.id}`);
+          fetch("http://localhost:3000/record/" + props.record._id, {
+            method: "DELETE",
+          })
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data);
+              alert("record deleted successfully");
+            });
         }}
       />
     </Card>
