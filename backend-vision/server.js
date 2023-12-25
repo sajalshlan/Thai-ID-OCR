@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
-app.use(express.json());
 const getTextFromImage = require("./indexVertex");
 const mongoose = require("mongoose");
-
+const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
 //mongodb configuration
+
+app.use(cors());
+app.use(express.json());
 
 const mongoUri =
   "mongodb+srv://admin:admin@sajalcluster.ivqeyvz.mongodb.net/Thai_OCR?retryWrites=true&w=majority";
@@ -27,10 +31,10 @@ const records = mongoose.model("records", recordSchema);
 //Function to parse the data
 function extractObject(dataString) {
   try {
-    // Remove leading and trailing backticks *and any characters before the opening curly brace*
+    // Removing any characters before the opening curly brace
     const trimmedData = dataString.trim().slice(7, -3);
 
-    // Parse the JSON string into a JavaScript object
+    // Parsing the JSON string into js object
     const parsedObject = JSON.parse(trimmedData);
 
     return parsedObject;
@@ -50,11 +54,36 @@ app.get("/records", async (req, res) => {
   res.json({ records: await records.find({}) });
 });
 
-app.post("/createrecord", async (req, res) => {
+app.get("/record/:recordId", async (req, res) => {
+  console.log("hi");
+  const recordId = req.params.recordId;
+
+  const record = await records.findById({ _id: recordId });
+  if (record) {
+    res.json({ record: record });
+  } else res.status(404).json({ message: "record not found" });
+});
+
+//middleware and config for fetching the image
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    return cb(null, path.join(__dirname, "public"));
+  },
+  filename: function (req, file, cb) {
+    return cb(null, `${Date.now()}_${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage });
+
+app.post("/createrecord", upload.single("file"), async (req, res) => {
   //logic for taking in an image and sending it to our function as parameter
-  console.log("hello");
-  const data = await getTextFromImage();
+
+  console.log(req.file.filename);
+  const fileName = req.file.filename;
+  const data = await getTextFromImage(`./public/${fileName}`);
   const finalResponse = extractObject(data);
+  console.log(finalResponse);
   await records(finalResponse).save();
   res.json({ message: "record created successfully" });
 });

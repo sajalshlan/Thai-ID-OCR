@@ -20,17 +20,16 @@ const model = genAI.getGenerativeModel({
   generationConfig,
 });
 
-export const generateContent = async () => {
+const getTextFromImage = async (imagePath) => {
   try {
     // Load image
-    const imagePath = "./aa.jpg";
     const imageData = await fs.readFile(imagePath);
     const imageBase64 = imageData.toString("base64");
 
     // Define parts
     const parts = [
       {
-        text: "Extract the following details from the Thai ID Card provided - Identification Number, first name, last name, Date of Birth, Religion, Address, Date of Issue, Issuing Officer, Expiry Date. Provide in JSON format in English Language. :\n",
+        text: "Extract the following details from the Thai ID Card provided - Identification Number, first name, last name, Date of Birth, Date of Issue, Expiry Date. Provide in JSON format as {identificationNumber: , firstName: , lastName: , dob: ,doi: ,doe: }",
       },
       {
         inlineData: {
@@ -44,8 +43,12 @@ export const generateContent = async () => {
       contents: [{ role: "user", parts }],
     });
     const response = await result.response;
-    console.log(response.text());
+    return response.text();
+    // console.log(response.text());
   } catch (error) {
     console.error("Error generating content:", error);
   }
 };
+
+// getTextFromImage();
+module.exports = getTextFromImage;
