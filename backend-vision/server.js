@@ -78,14 +78,11 @@ const upload = multer({ storage });
 
 app.post("/createrecord", upload.single("file"), async (req, res) => {
   //logic for taking in an image and sending it to our function as parameter
-
-  console.log(req.file.filename);
   const fileName = req.file.filename;
   const data = await getTextFromImage(`./public/${fileName}`);
   const finalResponse = extractObject(data);
-  console.log(finalResponse);
-  await records(finalResponse).save();
-  res.json({ message: "record created successfully" });
+  const savedResponse = await records(finalResponse).save();
+  res.json({ message: "record created successfully", savedResponse });
 });
 
 app.put("/record/:id", async (req, res) => {
