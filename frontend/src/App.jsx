@@ -33,7 +33,7 @@ function App() {
     const formData = new FormData();
     formData.append("file", selectedImage);
     const response = await axios.post(
-      "http://localhost:3000/createrecord",
+      "https://thai-ocr-backend.onrender.com/createrecord",
       formData
     );
     const data = response.data.savedResponse;

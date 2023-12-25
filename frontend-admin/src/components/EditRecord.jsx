@@ -9,7 +9,7 @@ function EditRecord() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/record/" + recordId)
+      .get("https://thai-ocr-backend.onrender.com/record/" + recordId)
       .then((response) => setRecord(response.data.record));
 
     console.log(record);
@@ -92,7 +92,7 @@ function EditRecord() {
           variant="contained"
           onClick={async () => {
             const response = await axios.put(
-              "http://localhost:3000/record/" + recordId,
+              "https://thai-ocr-backend.onrender.com/record/" + recordId,
               {
                 firstName,
                 lastName,

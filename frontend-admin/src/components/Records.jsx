@@ -9,7 +9,7 @@ function Records() {
   const [records, setRecords] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/records", {
+    fetch("https://thai-ocr-backend.onrender.com/records", {
       method: "GET",
     })
       .then((response) => {
@@ -85,9 +85,13 @@ const CourseComponent = (props) => {
         <br />
         <DeleteIcon
           onClick={async () => {
-            fetch("http://localhost:3000/record/" + props.record._id, {
-              method: "DELETE",
-            })
+            fetch(
+              "https://thai-ocr-backend.onrender.com/record/" +
+                props.record._id,
+              {
+                method: "DELETE",
+              }
+            )
               .then((response) => {
                 return response.json();
               })
