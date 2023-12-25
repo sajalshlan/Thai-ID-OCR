@@ -75,14 +75,12 @@ const CourseComponent = (props) => {
       <br />
       <EditIcon
         onClick={async () => {
-          console.log("hi");
-          navigate(`/records/${props.record._id}`);
+          navigate(`/record/${props.record._id}`);
         }}
       />
       <br />
       <DeleteIcon
         onClick={async () => {
-          console.log("hi");
           fetch("http://localhost:3000/record/" + props.record._id, {
             method: "DELETE",
           })
