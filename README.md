@@ -28,7 +28,7 @@ This is the page where users can upload their ID, and click on Get OCR and see t
 • Admin Dashboard
 working demo: https://thai-ocr-dashboard.vercel.app/records
 
-As the name suggests, this is the admin dashboard where we can view the records, where we can also edit and delete any of them by just clicking on the edit and delete icons.
+As the name suggests, this is the admin dashboard where we can view the records and also edit and delete any of them by just clicking on the edit and delete icons.
 
 • Backend
 live at: https://thai-ocr-backend.onrender.com
