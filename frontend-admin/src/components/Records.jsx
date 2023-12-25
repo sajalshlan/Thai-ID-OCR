@@ -57,6 +57,7 @@ const CourseComponent = (props) => {
       <Typography variant="h6">
         Identificaton Number: {props.record.identificationNumber}
       </Typography>
+      <br />
       <Typography variant="subtitle1">
         First Name: {props.record.firstName}
       </Typography>
@@ -73,26 +74,28 @@ const CourseComponent = (props) => {
         Date of Expiry: {props.record.doe}
       </Typography>
       <br />
-      <EditIcon
-        onClick={async () => {
-          navigate(`/record/${props.record._id}`);
-        }}
-      />
-      <br />
-      <DeleteIcon
-        onClick={async () => {
-          fetch("http://localhost:3000/record/" + props.record._id, {
-            method: "DELETE",
-          })
-            .then((response) => {
-              return response.json();
+      <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
+        <EditIcon
+          onClick={async () => {
+            navigate(`/record/${props.record._id}`);
+          }}
+        />
+        <br />
+        <DeleteIcon
+          onClick={async () => {
+            fetch("http://localhost:3000/record/" + props.record._id, {
+              method: "DELETE",
             })
-            .then((data) => {
-              console.log(data);
-              alert("record deleted successfully");
-            });
-        }}
-      />
+              .then((response) => {
+                return response.json();
+              })
+              .then((data) => {
+                console.log(data);
+                alert("record deleted successfully");
+              });
+          }}
+        />
+      </div>
     </Card>
   );
 };
