@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EditRecord from "./components/EditRecord";
 import Records from "./components/Records";
+import Home from "./components/Home";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     >
       <Router>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/records" element={<Records />} />
           <Route path="/record/:recordId" element={<EditRecord />} />
         </Routes>
