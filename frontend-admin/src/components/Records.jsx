@@ -17,6 +17,7 @@ function Records() {
       })
       .then((data) => {
         setRecords(data.records);
+        console.log(data.records[0]);
       });
   }, []);
 
@@ -29,10 +30,11 @@ function Records() {
         flexWrap: "wrap",
         justifyContent: "center",
         gap: "30px",
+        paddingTop: "30px",
       }}
     >
       {records.map((record) => {
-        return <CourseComponent key={record.id} record={record} />;
+        return <CourseComponent key={record._id} record={record} />;
       })}
     </div>
   );
@@ -92,6 +94,7 @@ const CourseComponent = (props) => {
               .then((data) => {
                 console.log(data);
                 alert("record deleted successfully");
+                window.location.reload(false);
               });
           }}
         />
