@@ -116,7 +116,6 @@ function App() {
                 "&:hover": {
                   backgroundColor: theme.palette.primary.dark,
                 },
-                marginBottom: "-50px",
               }}
             >
               Process OCR
