@@ -14,8 +14,8 @@ function App() {
       }}
     >
       <Router>
+        <Home />
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/records" element={<Records />} />
           <Route path="/record/:recordId" element={<EditRecord />} />
         </Routes>

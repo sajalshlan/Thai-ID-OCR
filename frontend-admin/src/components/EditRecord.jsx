@@ -1,4 +1,4 @@
-import { Button, Card, TextField } from "@mui/material";
+import { Button, Card, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -23,12 +23,16 @@ function EditRecord() {
   return (
     <div
       style={{
-        paddingTop: 120,
+        paddingTop: 50,
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      {/* <Typography variant="h5">Edit your record</Typography> */}
+      <Typography variant="h5">Edit your selected record</Typography>
+      <br />
+
       <Card
         variant="outlined"
         style={{ width: 400, padding: 20, borderRadius: 10 }}

@@ -93,7 +93,7 @@ const CourseComponent = (props) => {
               })
               .then((data) => {
                 console.log(data);
-                alert("record deleted successfully");
+                alert(`record deleted successfully`);
                 window.location.reload(false);
               });
           }}
