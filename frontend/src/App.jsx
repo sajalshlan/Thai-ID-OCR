@@ -128,7 +128,7 @@ const App = () => {
         <Card
           sx={{
             m: 2,
-            borderRadius: 16,
+            borderRadius: 8,
             boxShadow: 1,
             marginRight: -10,
           }}
@@ -159,22 +159,11 @@ const App = () => {
             )}
           </CardContent>
         </Card>
-        <Card sx={{ m: 2, borderRadius: 16, boxShadow: 1 }}>
+        <Card sx={{ m: 2, borderRadius: 8, boxShadow: 1 }}>
           <CardHeader
             title="Previous Results"
-            sx={{ p: 6, fontWeight: "bold", tracking: "tight" }}
+            sx={{ p: 8, fontWeight: "bold", tracking: "tight" }}
           />
-          {/* <CardContent sx={{ p: 4 }}>
-                        {previousResults.length > 0 ? (
-                            previousResults.map((result) => (
-                                <Typography key={result.id}>
-                                    {result.details}
-                                </Typography>
-                            ))
-                        ) : (
-                            <Typography>No previous results.</Typography>
-                        )}
-                    </CardContent> */}
           <Records />
         </Card>
       </Grid>
