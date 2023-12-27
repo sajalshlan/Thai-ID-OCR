@@ -49,7 +49,7 @@ function Records() {
         variant="outlined"
         value={searchKey}
         onChange={handleSearch}
-        style={{ marginBottom: "20px", padding: "20px" }}
+        style={{ marginBottom: "20px" }}
       />
       <div
         style={{
@@ -74,7 +74,7 @@ const CourseComponent = (props) => {
     <Card
       variant="outlined"
       sx={{
-        padding: "15px",
+        padding: "25px",
         minWidth: 280,
         minHeight: 200,
         display: "flex",
