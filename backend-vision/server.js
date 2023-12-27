@@ -51,7 +51,6 @@ function extractObject(dataString) {
 // 4. delete an OCR record
 
 app.get("/records", async (req, res) => {
-  console.log("hhi");
   res.json({ records: await records.find({}) });
 });
 
