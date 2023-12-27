@@ -1,6 +1,6 @@
 ## Overview
 
-Started off with a simple OCR (Optical Character Recognition) application, initially using Tesseract.js for text extraction. However, faced accuracy issues, possibly due to the underlying model, leading to a shift to Google's Vision API.
+Started with a simple OCR (Optical Character Recognition) application, initially using Tesseract.js for text extraction. However, faced accuracy issues, possibly due to the underlying model, leading to a shift to Google's Vision API.
 
 The journey involved creating an account on Google Cloud Console, enabling billing, setting up a Service Account, and enabling the Vision API. Although the API provided accurate results, the real challenge was parsing the specific details we needed from the extracted text.
 
@@ -14,27 +14,25 @@ When seeking assistance to improve data extraction, the idea struck to explore t
 
 ##### Pre Requirements
 
-Go to [Google AI Studios](https://makersuite.google.com/app/prompts/new_freeform) and create a new project on Google Cloud and get your API Keys.
+Go to [Google AI Studios](https://makersuite.google.com/app/prompts/new_freeform) create a new project on Google Cloud and get your API Keys.
 
 ### Flow
 
 #### Client UI
 
 • Client UI
-working demo: https://thai-ocr-frontend-eta.vercel.app/
+Live: https://thai-ocr-frontend-eta.vercel.app/
 
-This is the page where users can upload their ID, and click on Get OCR and see the results there also. Also if they want to extract details of other IDs or extract again if they are not satisfied with the details. There t can see the details of the current ID as well as the previous results too.
+This is the page where users can upload their ID, click on Get OCR, and see the results there also. Also if they want to extract details of other IDs or extract again if they are not satisfied with the details. There you can see the details of the current ID as well as the previous results too.
 
-• Admin Dashboard
-working demo: https://thai-ocr-dashboard.vercel.app/records
-
-As the name suggests, this is the admin dashboard where we can view the records and also edit and delete any of them by just clicking on the edit and delete icons.
+Here we can also view the records and edit and delete any of them by just clicking on the edit and delete icons.
+It also allows you to search in your Past Results and get the results immediately.
 
 • Backend
-live at: https://thai-ocr-backend.onrender.com
+Live: https://thai-ocr-backend.onrender.com
 
-1. This contains the backend logic for generating text from image using Gemini API (./indexVertex).
-2. The endpoints that (./server.js) exposes for our admin to view, edit and delete ocr records.d
+1. This contains the backend logic for generating text from images using Gemini API (./indexVertex).
+2. The endpoints that (./server.js) exposes for our admin to view, edit, and delete OCR records.
 
 ### Endpoints
 
