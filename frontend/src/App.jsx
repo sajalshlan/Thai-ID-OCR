@@ -155,7 +155,9 @@ const App = () => {
                 <Typography>Date of Expiry: {fetchedDetails.doe}</Typography>
               </div>
             ) : (
-              <Typography>Loading...</Typography>
+              <Typography>
+                Click on Process OCR and wait a minute please...
+              </Typography>
             )}
           </CardContent>
         </Card>
