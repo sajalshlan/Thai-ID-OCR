@@ -1,27 +1,32 @@
-import { useState } from "react";
-import {
-  Grid,
-  Card,
-  CardHeader,
-  CardContent,
-  Typography,
-  InputLabel,
-  Input,
-  Button,
-} from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+// eslint-disable-next-line no-unused-vars
+import * as React from "react";
 import axios from "axios";
 
-function App() {
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  Input,
+  InputLabel,
+  Typography,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { useState } from "react";
+import Records from "./components/Records";
+
+const App = () => {
   const theme = useTheme();
   const [selectedImage, setSelectedImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
-  const [fetchedDetails, setFetchedDetails] = useState({});
-  const [previousResults, setPreviousResults] = useState([]);
+  const [fetchedDetails, setFetchedDetails] = useState(null);
+  const [, setPreviousResults] = useState([]);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setSelectedImage(file);
+
     const reader = new FileReader();
     reader.onloadend = () => {
       setPreviewImage(reader.result);
@@ -30,6 +35,7 @@ function App() {
   };
 
   const simulateServerRequest = async () => {
+    // Simulate server request delay
     const formData = new FormData();
     formData.append("file", selectedImage);
     const response = await axios.post(
@@ -49,15 +55,10 @@ function App() {
   return (
     <Grid container spacing={4} sx={{ p: 4 }}>
       <Grid item xs={12} md={8} sx={{ display: { xs: "block", md: "flex" } }}>
-        <Card sx={{ m: 2, borderRadius: 8, boxShadow: 1 }}>
+        <Card sx={{ m: 2, borderRadius: 16, boxShadow: 1 }}>
           <CardHeader
             title="Upload Image"
-            sx={{
-              p: 6,
-              fontWeight: "bold",
-              tracking: "tight",
-              marginBottom: "-50px",
-            }}
+            sx={{ p: 6, fontWeight: "bold", tracking: "tight" }}
           />
           <CardContent
             sx={{
@@ -75,10 +76,7 @@ function App() {
               sx={{ width: "100%", maxW: "sm" }}
             >
               <Grid item>
-                <InputLabel
-                  htmlFor="ocrImage"
-                  sx={{ fontSize: "0.875rem", fontWeight: "bold" }}
-                >
+                <InputLabel htmlFor="ocrImage" sx={{ fontSize: "0.875rem" }}>
                   Select an image
                 </InputLabel>
               </Grid>
@@ -101,7 +99,10 @@ function App() {
             {previewImage && (
               <img
                 src={previewImage}
-                style={{ marginTop: "2rem", maxWidth: "80%" }}
+                style={{
+                  marginTop: "1rem",
+                  maxWidth: "100%",
+                }}
               />
             )}
             <Button
@@ -124,7 +125,14 @@ function App() {
         </Card>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Card sx={{ m: 2, borderRadius: 8, boxShadow: 1 }}>
+        <Card
+          sx={{
+            m: 2,
+            borderRadius: 16,
+            boxShadow: 1,
+            marginRight: -10,
+          }}
+        >
           <CardHeader
             title="Fetched Details"
             sx={{
@@ -147,44 +155,32 @@ function App() {
                 <Typography>Date of Expiry: {fetchedDetails.doe}</Typography>
               </div>
             ) : (
-              <Typography>No details fetched yet.</Typography>
+              <Typography>Loading...</Typography>
             )}
           </CardContent>
         </Card>
-        <Card sx={{ m: 2, borderRadius: 8, boxShadow: 1 }}>
+        <Card sx={{ m: 2, borderRadius: 16, boxShadow: 1 }}>
           <CardHeader
             title="Previous Results"
-            sx={{
-              p: 6,
-              fontWeight: "bold",
-              tracking: "tight",
-              marginBottom: "-50px",
-            }}
+            sx={{ p: 6, fontWeight: "bold", tracking: "tight" }}
           />
-          <CardContent sx={{ p: 4, marginBottom: "-50px" }}>
-            {previousResults.length > 0 ? (
-              previousResults.map((result, index) => (
-                <div key={result._id} style={{ marginBottom: "50px" }}>
-                  <Typography>{index + 1}</Typography>
-                  <Typography>
-                    Identification Number: {result.identificationNumber}
-                  </Typography>
-                  <Typography>First Name: {result.firstName}</Typography>
-                  <Typography>Last Name: {result.lastName}</Typography>
-                  <Typography>Date of Birth: {result.dob}</Typography>
-                  <Typography>Date of Issue: {result.doi}</Typography>
-                  <Typography>Date of Expiry: {result.doe}</Typography>
-                </div>
-              ))
-            ) : (
-              <Typography>No previous results.</Typography>
-            )}
-          </CardContent>
+          {/* <CardContent sx={{ p: 4 }}>
+                        {previousResults.length > 0 ? (
+                            previousResults.map((result) => (
+                                <Typography key={result.id}>
+                                    {result.details}
+                                </Typography>
+                            ))
+                        ) : (
+                            <Typography>No previous results.</Typography>
+                        )}
+                    </CardContent> */}
+          <Records />
         </Card>
       </Grid>
     </Grid>
   );
-}
+};
 
 export default App;
 
